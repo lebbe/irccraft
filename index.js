@@ -8,7 +8,7 @@ var minecraftProcess = exec('java -jar  ' + config.jarfile + ' nogui', function(
 	console.log('stdout: ' + stdout);
     console.log('stderr: ' + stderr);
     if (error !== null) {
-      console.log('exec error: ' + error);
+    	console.log('exec error: ' + error);
     }
 });
 
@@ -18,7 +18,6 @@ var bot = new irc.Client(config.ircServer, config.botName, {
 });
 
 minecraftProcess.stdout.on('data', function(data) {
-//[Server thread/INFO]: lebchen joined the game
 	var join = /\[Server thread\/INFO\]: (.*) (joined the game)/;
 	var left = /\[Server thread\/INFO\]: (.*) (left the game)/;
 	var talk = /\[Server thread\/INFO\]: <(.*)> (.*)/;

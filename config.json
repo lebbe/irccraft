@@ -1,8 +1,7 @@
 {
 	"jarfile": "minecraft_server.1.8.9.jar",
-	"placement": "~/privat/mc-server",
 	"ircServer": "leguin.freenode.net",
-	"botName": "IRCraftJS",
-	"channel": "#gloop2",
-	"realName": "IRCraftJS 1.0 (bot)"
+	"botName": "IRCCraftJS",
+	"channel": "#irccraft",
+	"realName": "IRCCraftJS 1.0 (bot)"
 }
