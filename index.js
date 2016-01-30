@@ -1,6 +1,7 @@
 var irc = require('irc');
 var fs = require('fs');
 var exec = require('child_process').exec;
+var hash = require('string-hash');
 
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
@@ -17,6 +18,11 @@ var bot = new irc.Client(config.ircServer, config.botName, {
 	realName: config.realName
 });
 
+function colorNick(nick) {
+	var code = (hash(nick) % 14) + 2;
+	return '\x03' + (code < 10 ? '0' : '') + code + nick + '\x0f';
+}
+
 minecraftProcess.stdout.on('data', function(data) {
 	var join = /\[Server thread\/INFO\]: (.*) (joined the game)/;
 	var left = /\[Server thread\/INFO\]: (.*) (left the game)/;
@@ -26,11 +32,11 @@ minecraftProcess.stdout.on('data', function(data) {
 	var match;
 
 	if(match = talk.exec(chunk)) {
-		bot.say(config.channel, '<' + match[1] + '> ' + match[2]);
+		bot.say(config.channel, '<' + colorNick(match[1]) + '> ' + match[2]);
 	} else if (match = join.exec(chunk)) {
-		bot.say(config.channel, match[1] + ' joined the game.');
+		bot.say(config.channel, colorNick(match[1]) + ' joined the game.');
 	} else if (match = left.exec(chunk)) {
-		bot.say(config.channel, match[1] + ' left the game.');
+		bot.say(config.channel, colorNick(match[1]) + ' left the game.');
 	}
 });
 

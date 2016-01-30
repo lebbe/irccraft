@@ -13,7 +13,8 @@
   "author": "Lars-Erik Bruce",
   "license": "MIT",
   "dependencies": {
-    "irc": "^0.4.0"
+    "irc": "^0.4.0",
+    "string-hash": "^1.1.0"
   },
   "devDependencies": {}
 }
