@@ -29,6 +29,9 @@ minecraftProcess.stdout.on('data', function(data) {
 	var talk = /\[Server thread\/INFO\]: <(.*)> (.*)/
 	var chunk = data.toString()
 
+	// Ignore stuff the server is saying itself.
+	if(chunk.indexOf('[Server thread\/INFO]: [Server]') > -1) return
+
 	var match
 
 	if(match = talk.exec(chunk)) {
